@@ -79,28 +79,12 @@ const ModalFooter = styled.div`
 `;
 
 /**
- * Modal component. This component uses ReactDOM.createPortal to injects the
- * modal and would be mounted to modal-root element. It has three parts in the
- * modal, Header, Body and Footer.
+ * Modal component. This component has three parts in the modal: Header, Body and Footer.
  */
 function ModalComponent(props: Props): React.Node {
   const { children, closeLabel, footer, onModalClose, title } = props;
-  // Create an empty div that we'll render the modal into.
-  const modalElement = document.createElement("div");
-  const modalRoot = document.getElementById("modal-root");
 
-  // Append element part would only run when mount and unmount,
-  // it not depends on any states and porps.
-  useEffect(() => {
-    // Append the element into the modal root once it mounts
-    modalRoot.appendChild(modalElement);
-    return () => {
-      // Remove the element from the modal root once it unmounts
-      modalRoot.removeChild(modalElement);
-    };
-  }, []);
-
-  const modalRender = (
+  return (
     <ModalStructure data-testid="modal">
       <ModalHeader>
         <ModalTitle>{title}</ModalTitle>
@@ -111,16 +95,6 @@ function ModalComponent(props: Props): React.Node {
       <ModalBody>{children}</ModalBody>
       <ModalFooter>{footer}</ModalFooter>
     </ModalStructure>
-  );
-
-  // Use ReactDOM.createPortal to injects the modal. We need this because Modal is a
-  // base component, we need to make sure it is visually 'break out', even if parent
-  // component has an `overflow:hidden` or `z-index` style
-  return ReactDOM.createPortal(
-    // modal dom
-    modalRender,
-    // A modal element where React injects the modal
-    modalElement
   );
 }
 
