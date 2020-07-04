@@ -43,8 +43,8 @@ const BackDrop = styled.div`
 `;
 
 /**
- * ModalContainer component. This component controls the modal state, when clicks 
- * the modal open button, modal would pop up. When clicks the close button on modal 
+ * ModalContainer component. This component controls the modal state, when clicks
+ * the modal open button, modal would pop up. When clicks the close button on modal
  * or backDrop, the modal would be closed.
  */
 function ModalContainer(props: Props): React.Node {
@@ -58,7 +58,7 @@ function ModalContainer(props: Props): React.Node {
   };
 
   return (
-    <div id="modal-root">
+    <>
       <Button data-testid="open-modal-click-button" onClick={onModalOpen}>
         Open Modal
       </Button>
@@ -75,7 +75,7 @@ function ModalContainer(props: Props): React.Node {
           </Modal>
         </>
       )}
-    </div>
+    </>
   );
 }
 
